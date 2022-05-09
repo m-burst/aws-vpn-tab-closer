@@ -18,8 +18,16 @@ async function closeAwsTabs() {
     }
 }
 
+async function closeAwsTabsSafe() {
+    try {
+        await closeAwsTabs();
+    } catch (e) {
+        console.error("Error in closeAwsTabs", e);
+    }
+}
+
 function startup() {
-    setInterval(closeAwsTabs, 30_000);
+    setInterval(closeAwsTabsSafe, 30_000);
 }
 
 startup();
