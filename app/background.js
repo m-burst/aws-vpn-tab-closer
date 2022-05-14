@@ -18,16 +18,12 @@ async function closeAwsTabs() {
     }
 }
 
-async function closeAwsTabsSafe() {
-    try {
-        await closeAwsTabs();
-    } catch (e) {
-        console.error("Error in closeAwsTabs", e);
-    }
-}
-
-function startup() {
-    setInterval(closeAwsTabsSafe, 30_000);
-}
-
-startup();
+chrome.webNavigation.onCompleted.addListener(details => {
+    setTimeout(closeAwsTabs, 1000);
+}, {
+    url: [
+        {
+            hostEquals: "127.0.0.1",
+        }
+    ],
+})
