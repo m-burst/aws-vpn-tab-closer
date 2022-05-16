@@ -27,3 +27,5 @@ chrome.webNavigation.onCompleted.addListener(details => {
         }
     ],
 })
+
+setTimeout(closeAwsTabs, 1000);
